@@ -16,8 +16,8 @@ done
 
 
 # Variables
-IMAGE_NAME="depth-anything-gpu"
-CONTAINER_NAME="depth-anything-gpu"
+IMAGE_NAME="my-img"
+CONTAINER_NAME="my-container"
 PORT_MAPPING="8000:8000"
 BUILD_CONTEXT="../"
 DOCKERFILE="Dockerfile"
