@@ -34,9 +34,7 @@ RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
 if [ $envtype == "gpu" ]; then
   BASE_IMAGE="nvidia/cuda:11.6.1-devel-ubuntu20.04"
 elif [ $envtype == "cpu" ]; then
-  BASE_IMAGE="python:3.8-slim"
-elif [ $envtype == "mps" ]; then
-  BASE_IMAGE="python:3.8-slim"
+  BASE_IMAGE="ubuntu:20.04"
 else
   echo "Invalid base image type. Please provide either 'gpu' or 'cpu' or 'mps'."
   exit 1
