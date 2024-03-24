@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # select the base image type
-# usage: ./deploy.sh --env-type <gpu/cpu/mps>
+# usage: ./deploy.sh --env-type <gpu/cpu>
 
 while [ "$1" != "" ]; do
     case $1 in
