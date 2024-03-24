@@ -59,6 +59,7 @@ Please check [the slide format resources about Ascender (Japanese)](https://cvpa
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://github.com/docker/compose)
 - (Optional) [NVIDIA Container Toolkit (nvidia-docker2)](https://github.com/NVIDIA/nvidia-docker)
+- (Optional)[Mutagen](brew install mutagen-io/mutagen/mutagen)
 
 **NOTE**: Example codes in the README.md are written for `Docker Compose v2`. However, Ascender also should work under `Docker Compose v1`. If you are using `Docker Compose v1`, just replace `docker compose` in the example code by `docker-compose`.
 
