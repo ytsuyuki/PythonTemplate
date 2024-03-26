@@ -19,3 +19,55 @@ This repository adds a feature to Ascender that uses Mutagen to synchronize file
 - Installed mutagen.
 
 
+## Overview Graph
+This graph is over view graph when you uses ./environments/deploy.sh
+
+```mermaid
+graph LR
+    %% Local Machine details
+    LocalProjectFolder[Local Project Folder] -->|contains| LocalContents
+    LocalContents[Project Contents] -->|includes| SrcFolder[src]
+    LocalContents -->|includes| ReadmeFile[README.md]
+    LocalContents -->|includes| DockerFile[Dockerfile]
+    LocalProjectFolder -->|uses| Gitignore[.gitignore]
+
+    %% Sync operation
+    LocalProjectFolder -->|synced by| MutagenSync[mutagen sync]
+    MutagenSync -.-> |syncs to| RemoteVolumeFolder
+
+    %% Local Docker Context
+    LocalDockerContext[Docker Context] -.-> |ssh connection| RemoteDockerContainer[Docker Container]
+
+    %% Ignored Files not shown in local but stored in remote
+    Gitignore -.->|ignores on local| HiddenFiles
+
+    %% Mirror relationship between Local and Remote Contents
+    LocalContents --> |mirrors| RemoteContents
+
+    subgraph "Local Machine"
+        LocalContents
+        LocalProjectFolder
+        LocalDockerContext
+        SrcFolder
+        Gitignore
+        ReadmeFile
+        DockerFile
+        MutagenSync
+    end
+
+    subgraph "Remote Machine"
+        RemoteVolumeFolder[Remote Docker Volume] -->|contains| RemoteContents
+        RemoteDockerContainer -.->|mounted on| RemoteVolumeFolder
+        RemoteVolumeFolder -->|contains| StoredInRemote
+
+        %% Stored in Remote - Adjusted for clarity
+        StoredInRemote[Stored in Remote] --> HiddenFiles[Hidden Files]
+        HiddenFiles --> |includes| VenvFolder[.venv/]
+        HiddenFiles --> |includes| LogFiles[*.log]
+        HiddenFiles --> |includes| EnvFile[.env]
+        HiddenFiles --> |includes| PyCache[__pycache__]
+        HiddenFiles --> |includes| GitHubFolder[.github]
+    end
+
+```
+
