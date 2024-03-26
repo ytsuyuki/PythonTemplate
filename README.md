@@ -20,8 +20,7 @@ This repository adds a feature to Ascender that uses Mutagen to synchronize file
 - Installed mutagen.
 
 
-## Overview Graph
-This graph is over view graph when you uses ./environments/deploy.sh \
+## Overview ./environments/deploy.sh
 The graph illustrates a development workflow that involves synchronizing a local project folder with a remote machine using Mutagen sync. The local project folder contains the source code, README, Dockerfile, and a .gitignore file. The .gitignore file specifies files and folders that should be ignored locally but are still stored on the remote machine. The local machine also has a Docker context that establishes an SSH connection with the remote Docker container. On the remote machine, there is a Docker volume that contains the remote contents, which mirror the local project folder, as well as additional files and folders stored exclusively on the remote machine.
 
 Technologies used:
