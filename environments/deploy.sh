@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# Variables
+IMAGE_NAME="my-img"
+CONTAINER_NAME="my-container"
+PORT_MAPPING="8000:8000"
+BUILD_CONTEXT="../"
+DOCKERFILE="Dockerfile"
+PROJECT_NAME=ascender
+USER_NAME=challenger
+GROUP_NAME=challengers
+HOST_UID="${HOST_UID-1000}"
+HOST_GID="${HOST_GID-1000}"
+PYTHON_VERSION="3.8"
+APPLICATION_DIRECTORY="/home/${USER_NAME}/${PROJECT_NAME}"
+RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
+
 # Display help message
 display_help() {
     echo "Usage: ./deploy.sh [options]"
@@ -43,22 +58,6 @@ if [ -z "$envtype" ]; then
     echo "Use --help for more information"
     exit 1
 fi
-
-
-# Variables
-IMAGE_NAME="my-img"
-CONTAINER_NAME="my-container"
-PORT_MAPPING="8000:8000"
-BUILD_CONTEXT="../"
-DOCKERFILE="Dockerfile"
-PROJECT_NAME=ascender
-USER_NAME=challenger
-GROUP_NAME=challengers
-HOST_UID="${HOST_UID-1000}"
-HOST_GID="${HOST_GID-1000}"
-PYTHON_VERSION="3.8"
-APPLICATION_DIRECTORY="/home/${USER_NAME}/${PROJECT_NAME}"
-RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
 
 # base image type is gpu or cpu or mps
 if [ $envtype == "gpu" ]; then
