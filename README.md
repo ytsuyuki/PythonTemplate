@@ -20,7 +20,19 @@ This repository adds a feature to Ascender that uses Mutagen to synchronize file
 
 
 ## Overview Graph
-This graph is over view graph when you uses ./environments/deploy.sh
+This graph is over view graph when you uses ./environments/deploy.sh \
+The graph illustrates a development workflow that involves synchronizing a local project folder with a remote machine using Mutagen sync. The local project folder contains the source code, README, Dockerfile, and a .gitignore file. The .gitignore file specifies files and folders that should be ignored locally but are still stored on the remote machine. The local machine also has a Docker context that establishes an SSH connection with the remote Docker container. On the remote machine, there is a Docker volume that contains the remote contents, which mirror the local project folder, as well as additional files and folders stored exclusively on the remote machine.
+
+Technologies used:
+- Mutagen sync: A tool used for synchronizing the contents of the local project folder with the remote machine.
+- Docker: A platform for developing, shipping, and running applications using containers. The graph shows the usage of Docker containers and volumes.
+- SSH (Secure Shell): A network protocol used for secure communication between the local Docker context and the remote Docker container.
+- Git: A version control system used for tracking changes in the project. The .gitignore file is a Git configuration file that specifies files and folders to be ignored by Git.
+- README.md: A file written in Markdown format, commonly used for providing information and documentation about the project.
+- Dockerfile: A text file that contains instructions for building a Docker image, which can be used to create Docker containers.
+These technologies work together to create a development environment that allows for easy synchronization between the local and remote machines, containerization of the application using Docker, secure communication via SSH, version control with Git, and documentation using README.md.
+
+
 
 ```mermaid
 graph LR
