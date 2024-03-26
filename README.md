@@ -27,11 +27,6 @@ Technologies used:
 - Mutagen sync: A tool used for synchronizing the contents of the local project folder with the remote machine.
 - Docker: A platform for developing, shipping, and running applications using containers. The graph shows the usage of Docker containers and volumes.
 - SSH (Secure Shell): A network protocol used for secure communication between the local Docker context and the remote Docker container.
-- Git: A version control system used for tracking changes in the project. The .gitignore file is a Git configuration file that specifies files and folders to be ignored by Git.
-- README.md: A file written in Markdown format, commonly used for providing information and documentation about the project.
-- Dockerfile: A text file that contains instructions for building a Docker image, which can be used to create Docker containers.
-These technologies work together to create a development environment that allows for easy synchronization between the local and remote machines, containerization of the application using Docker, secure communication via SSH, version control with Git, and documentation using README.md.
-
 
 
 ```mermaid
