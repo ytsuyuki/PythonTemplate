@@ -1,18 +1,48 @@
 #!/bin/bash
 
-# select the base image type
-# usage: ./deploy.sh --env-type <gpu/cpu>
+# Display help message
+display_help() {
+    echo "Usage: ./deploy.sh [options]"
+    echo
+    echo "Options:"
+    echo "  --env-type <gpu/cpu>    Specify the base image type (gpu or cpu)"
+    echo "  --use-port              Use port mapping"
+    echo "  --help                  Display this help message"
+    echo
+}
+
+# Select the base image type and port usage
+# Usage: ./deploy.sh --env-type <gpu/cpu> [--use-port]
+
+use_port=false
 
 while [ "$1" != "" ]; do
     case $1 in
-        --env-type )                 shift
-                                     envtype=$1
-                                     ;;
-        * )                          echo "Invalid argument: $1"
-                                     exit 1
+        --env-type )
+            shift
+            envtype=$1
+            ;;
+        --use-port )
+            use_port=true
+            ;;
+        --help )
+            display_help
+            exit 0
+            ;;
+        * )
+            echo "Invalid argument: $1"
+            echo "Use --help for more information"
+            exit 1
     esac
     shift
 done
+
+# Check if env-type is provided
+if [ -z "$envtype" ]; then
+    echo "Please specify the base image type using --env-type <gpu/cpu>"
+    echo "Use --help for more information"
+    exit 1
+fi
 
 
 # Variables
@@ -60,17 +90,19 @@ docker volume create $PROJECT_NAME
 # Step 3: Run the Docker container with GPU support and port mapping if it doesn't run and exists
 docker stop $CONTAINER_NAME
 
+docker_run_cmd="docker run -it -d --rm"
 if [ $envtype == "gpu" ]; then
-    docker run -it -d --gpus all --rm \
-    -v $PROJECT_NAME:$APPLICATION_DIRECTORY \
-    -p $PORT_MAPPING \
-    --name $CONTAINER_NAME $IMAGE_NAME
-else
-    docker run -it -d --rm \
-    -v $PROJECT_NAME:$APPLICATION_DIRECTORY \
-    -p $PORT_MAPPING \
-    --name $CONTAINER_NAME $IMAGE_NAME
+    docker_run_cmd+=" --gpus all"
 fi
+
+if $use_port; then
+    docker_run_cmd+=" -p $PORT_MAPPING"
+fi
+
+docker_run_cmd+=" -v $PROJECT_NAME:$APPLICATION_DIRECTORY --name $CONTAINER_NAME $IMAGE_NAME"
+
+# Execute the final docker run command
+eval $docker_run_cmd
 
 
 # Step 4: Recreate a Mutagen sync session
