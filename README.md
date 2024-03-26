@@ -10,6 +10,7 @@
 
 # PythonTemplate
 This template is created based on Ascender. \
+
 Basic usage is written in [Ascender](https://github.com/cvpaperchallenge/Ascender) .
 This repository adds a feature to Ascender that uses Mutagen to synchronize files between local and remote development environments.
 
