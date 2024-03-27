@@ -78,3 +78,14 @@ graph LR
 
 ```
 
+## Knowlege
+- run jupyter notebook in docker container
+```
+poetry run jupyter notebook --port=<port num> --ip=0.0.0.0
+```
+- run jupyter lab in docker container
+```
+poetry run jupyter lab --port=<port num> --ip=0.0.0.0
+```
+
+
