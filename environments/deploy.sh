@@ -109,7 +109,7 @@ eval $docker_run_cmd
 mutagen sync terminate $PROJECT_NAME-sync
 
 # Create the Mutagen sync command
-CMD="mutagen sync create $BUILD_CONTEXT docker://$CONTAINER_NAME$APPLICATION_DIRECTORY --name=$PROJECT_NAME-sync --sync-mode='two-way-safe'"
+CMD="mutagen sync create $BUILD_CONTEXT docker://$CONTAINER_NAME$APPLICATION_DIRECTORY --name=$PROJECT_NAME-sync --sync-mode='two-way-resolved'"
 
 GITIGNORE_PATH="$BUILD_CONTEXT/.gitignore"
 # Add each line in .gitignore as an --ignore flag
