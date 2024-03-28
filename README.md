@@ -31,7 +31,7 @@ PyDen is a template created based on [Ascender](https://github.com/cvpaperchalle
 4. Start developing your Python project, and the changes will be automatically synchronized between the local and remote environments.
 
 ## Running Jupyter Notebook and Lab
-To run Jupyter Notebook or Jupyter Lab within the Docker container, use the following commands:
+To run Jupyter Notebook or Jupyter Lab in the Docker container, use the following commands:
 
 - Jupyter Notebook:
   ```
