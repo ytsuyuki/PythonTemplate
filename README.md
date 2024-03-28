@@ -1,3 +1,4 @@
+
 ![stable](https://img.shields.io/badge/stable-v0.1.3-blue)
 ![python versions](https://img.shields.io/badge/python-3.8%20%7C%203.9-blue)
 [![tests](https://github.com/cvpaperchallenge/Ascender/actions/workflows/lint-and-test.yaml/badge.svg)](https://github.com/cvpaperchallenge/Ascender/actions/workflows/lint-and-test.yaml)
@@ -8,17 +9,41 @@
 [![Typing: mypy](https://img.shields.io/badge/typing-mypy-blue)](https://github.com/python/mypy)
 [![DOI](https://zenodo.org/badge/466620310.svg)](https://zenodo.org/badge/latestdoi/466620310)
 
-# PyDen(Python Docker Environment)
-This template is created based on Ascender. \
+# PyDen (Python Docker Environment)
+PyDen is a template created based on [Ascender](https://github.com/cvpaperchallenge/Ascender) that provides a streamlined setup for Python development environments using Docker and Mutagen file synchronization. It aims to simplify the process of setting up and managing development environments across local and remote machines.
 
-Basic usage is written in [Ascender](https://github.com/cvpaperchallenge/Ascender) .
-This repository adds a feature to Ascender that uses Mutagen to synchronize files between local and remote development environments.
+## Features
+- **Docker-based Environment**: PyDen leverages Docker to create isolated and reproducible development environments, ensuring consistency across different machines.
+- **Mutagen File Synchronization**: It utilizes Mutagen to efficiently synchronize files between the local project folder and the remote development environment, keeping the codebase in sync.
+- **GPU and CPU Support**: PyDen supports both GPU and CPU environments, allowing developers to choose the appropriate setup based on their project requirements.
+- **Automated Deployment**: The provided deployment script automates the setup process, including building Docker images, managing volumes and containers, and establishing file synchronization.
+- **Jupyter Notebook and Lab Integration**: PyDen enables running Jupyter Notebook and Jupyter Lab within the Docker container, facilitating interactive development and data exploration.
 
-## Prerequisite
-- Installed docker in both the local environment and the remote one.
-- Constructed connection with docker context from local to remote.
-- Installed mutagen.
+## Prerequisites
+- Docker installed on both the local and remote machines.
+- Docker context connection established from the local to the remote machine.
+- Mutagen installed on the local machine.
 
+## Getting Started
+1. Clone the PyDen repository to your local machine.
+2. Customize the `Dockerfile` and `.gitignore` file based on your project requirements.
+3. Run the deployment script (`./environments/deploy.sh`) to set up the development environment.
+4. Start developing your Python project, and the changes will be automatically synchronized between the local and remote environments.
+
+## Running Jupyter Notebook and Lab
+To run Jupyter Notebook or Jupyter Lab within the Docker container, use the following commands:
+
+- Jupyter Notebook:
+  ```
+  poetry run jupyter notebook --port=<port num> --ip=0.0.0.0
+  ```
+
+- Jupyter Lab:
+  ```
+  poetry run jupyter lab --port=<port num> --ip=0.0.0.0
+  ```
+
+Replace `<port num>` with the desired port number.
 
 ## Overview of the Deployment Script (./environments/deploy.sh)
 
@@ -50,7 +75,7 @@ The deployment script automates the process of setting up and managing a develop
 7. **Summary Display**:
    - Finally, the script displays a summary of the operations performed, providing an overview of the deployment process.
 
-## Technologies Used
+### Technologies Used
 
 - **Docker**:
   - Used for containerization, allowing the development environment to be isolated and easily reproducible.
@@ -148,14 +173,11 @@ sequenceDiagram
     Script->>User: Display summary of operations
 ```
 
-## Knowlege
-- run jupyter notebook in docker container
-```
-poetry run jupyter notebook --port=<port num> --ip=0.0.0.0
-```
-- run jupyter lab in docker container
-```
-poetry run jupyter lab --port=<port num> --ip=0.0.0.0
-```
+## Contributing
+Contributions to PyDen are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
 
+## License
+PyDen is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
+## Acknowledgements
+PyDen is built upon the foundation of Ascender and leverages various open-source tools and libraries. We extend our gratitude to the developers and maintainers of these projects.
