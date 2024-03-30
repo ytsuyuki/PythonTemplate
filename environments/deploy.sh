@@ -128,6 +128,13 @@ if mutagen sync list | grep -q "$PROJECT_NAME-sync"; then
     mutagen sync terminate $PROJECT_NAME-sync 2>/dev/null
 fi
 
+Step 5: Output created resources to a file
+OUTPUT_FILE="created_resources.txt"
+
+echo "IMAGE_NAME=$IMAGE_NAME" > $OUTPUT_FILE
+echo "CONTAINER_NAME=$CONTAINER_NAME" >> $OUTPUT_FILE
+echo "PROJECT_NAME=$PROJECT_NAME" >> $OUTPUT_FILE
+
 # Create the Mutagen sync command
 CMD="mutagen sync create $BUILD_CONTEXT docker://$CONTAINER_NAME$APPLICATION_DIRECTORY --name=$PROJECT_NAME-sync --sync-mode='two-way-resolved'"
 
