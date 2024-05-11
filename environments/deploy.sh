@@ -128,7 +128,7 @@ if mutagen sync list | grep -q "$PROJECT_NAME-sync"; then
     mutagen sync terminate $PROJECT_NAME-sync 2>/dev/null
 fi
 
-Step 5: Output created resources to a file
+# Step 5: Output created resources to a file
 OUTPUT_FILE="created_resources.txt"
 
 echo "IMAGE_NAME=$IMAGE_NAME" > $OUTPUT_FILE
