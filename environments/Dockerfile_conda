@@ -1,0 +1,42 @@
+ARG BASE_IMAGE=ubuntu:20.04
+FROM ${BASE_IMAGE}
+
+ARG PROJECT_NAME=ascender
+ARG USER_NAME=challenger
+ARG GROUP_NAME=challengers
+ARG UID=1000
+ARG GID=1000
+ARG PYTHON_VERSION=3.7
+ARG APPLICATION_DIRECTORY=/home/${USER_NAME}/${PROJECT_NAME}
+
+ENV DEBIAN_FRONTEND="noninteractive" \
+    LC_ALL="C.UTF-8" \
+    LANG="C.UTF-8" \
+    PYTHONPATH=${APPLICATION_DIRECTORY}
+ENV CONDA_ENVS_PATH=$APPLICATION_DIRECTORY/.venv
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl make ssh openssh-client \
+    build-essential 
+
+RUN apt-get install -y --no-install-recommends wget
+
+RUN wget --continue --progress=bar:force https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    bash ~/miniconda.sh -b -p /opt/miniconda && \
+    rm ~/miniconda.sh && \
+    /opt/miniconda/bin/conda init bash
+
+ENV PATH="/opt/miniconda/bin:$PATH"
+
+RUN groupadd -g ${GID} ${GROUP_NAME} && \
+    useradd -ms /bin/bash -u ${UID} -g ${GID} ${USER_NAME}
+
+USER ${USER_NAME}
+
+WORKDIR ${APPLICATION_DIRECTORY}
+
+RUN conda create -y -p $CONDA_ENVS_PATH/${PROJECT_NAME} python=${PYTHON_VERSION}
+RUN echo "conda activate ${PROJECT_NAME}" >> ~/.bashrc 
+SHELL ["conda", "run", "-p", "$CONDA_ENVS_PATH/${PROJECT_NAME}", "/bin/bash", "-c"]
+
+CMD [ "/bin/bash" ]
