@@ -16,7 +16,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl make ssh openssh-client \
-    build-essential 
+    build-essential libatlas-base-dev libpython3.7 libtbb2
+ 
 
 RUN apt-get install -y --no-install-recommends wget
 
@@ -34,8 +35,5 @@ USER ${USER_NAME}
 
 WORKDIR ${APPLICATION_DIRECTORY}
 
-RUN conda create -y ${PROJECT_NAME} python=${PYTHON_VERSION}
-RUN echo "conda activate ${PROJECT_NAME}" >> ~/.bashrc 
-SHELL ["conda", "run", "${PROJECT_NAME}", "/bin/bash", "-c"]
 
-CMD [ "/bin/bash" ]
+CMD ["/bin/bash", "-c", "source /opt/miniconda/bin/activate && conda init  && /bin/bash"]
