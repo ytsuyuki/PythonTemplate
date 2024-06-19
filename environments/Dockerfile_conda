@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl make ssh openssh-client \
-    build-essential libatlas-base-dev libpython3.7 libtbb2
+    build-essential
  
 
 RUN apt-get install -y --no-install-recommends wget
