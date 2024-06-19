@@ -15,11 +15,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     PYTHONPATH=${APPLICATION_DIRECTORY}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl make ssh openssh-client \
+    git curl make ssh wget openssh-client \
     build-essential
- 
-
-RUN apt-get install -y --no-install-recommends wget
 
 RUN wget --continue --progress=bar:force https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
     bash ~/miniconda.sh -b -p /opt/miniconda && \
