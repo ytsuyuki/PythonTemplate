@@ -7,13 +7,12 @@ ARG GROUP_NAME=challengers
 ARG UID=1000
 ARG GID=1000
 ARG PYTHON_VERSION=3.7
-ARG APPLICATION_DIRECTORY=/home/${USER_NAME}/${PROJECT_NAME}
+ARG APPLICATION_DIRECTORY=/home/${USER_NAME}
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     LC_ALL="C.UTF-8" \
     LANG="C.UTF-8" \
     PYTHONPATH=${APPLICATION_DIRECTORY}
-ENV CONDA_ENVS_PATH=$APPLICATION_DIRECTORY/.venv
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl make ssh openssh-client \
@@ -35,8 +34,8 @@ USER ${USER_NAME}
 
 WORKDIR ${APPLICATION_DIRECTORY}
 
-RUN conda create -y -p $CONDA_ENVS_PATH/${PROJECT_NAME} python=${PYTHON_VERSION}
+RUN conda create -y ${PROJECT_NAME} python=${PYTHON_VERSION}
 RUN echo "conda activate ${PROJECT_NAME}" >> ~/.bashrc 
-SHELL ["conda", "run", "-p", "$CONDA_ENVS_PATH/${PROJECT_NAME}", "/bin/bash", "-c"]
+SHELL ["conda", "run", "${PROJECT_NAME}", "/bin/bash", "-c"]
 
 CMD [ "/bin/bash" ]
