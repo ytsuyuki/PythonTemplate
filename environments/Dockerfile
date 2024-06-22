@@ -40,6 +40,13 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTH
 RUN groupadd -g ${GID} ${GROUP_NAME} \
     && useradd -ms /bin/sh -u ${UID} -g ${GID} ${USER_NAME}
 
+RUN wget --continue --progress=bar:force https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    bash ~/miniconda.sh -b -p /opt/miniconda && \
+    rm ~/miniconda.sh && \
+    /opt/miniconda/bin/conda init bash
+
+ENV PATH="/opt/miniconda/bin:$PATH"
+
 USER ${USER_NAME}
 WORKDIR ${APPLICATION_DIRECTORY}
 
